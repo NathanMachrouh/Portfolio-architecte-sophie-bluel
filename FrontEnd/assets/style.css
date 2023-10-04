@@ -95,7 +95,44 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
+.login h2{
+	text-align: center;
+	margin-bottom: 1.5rem;
+}
+
+.login, #loginForm{
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	gap: 1rem;
+}
+
+#email, #password{
+	padding: 0.7rem;
+	width: 300px;
+	border: none;
+	box-shadow: 0px 4px 14px 0px #00000017;
+}
+
+.forgotpassword{
+	text-align: center;
+}
+
+#email:focus, #password:focus{
+	outline: none;
+}
+
+#connect{
+	padding: 1rem;
+}
+
+
+a{
+	text-decoration: none;
+	color: inherit;
+}
+
+li:hover, a:hover {
 	color: #B1663C;
 }
 #introduction {
