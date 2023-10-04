@@ -21,4 +21,38 @@ const createGallery = (data) => {
     };
 };
 
+const createCategorie = (data) => {
+    const filtre = document.querySelector (".filtre");
+    const tous = document.createElement ("button");
+    tous.innerHTML = "Tous";
+    tous.addEventListener ("click", () => 
+    fetchWork(urlWorks, createGallery));
+    filtre.appendChild(tous);
+    for(const categorie of data){
+        const bouton = document.createElement("button");
+        bouton.innerHTML = categorie.name;
+        bouton.addEventListener ("click", () => 
+        fetchCategorieFilter(urlWorks, createGallery, categorie.id));
+        filtre.appendChild(bouton);
+    }
+
+};
+
+const urlCategorie = "http://localhost:5678/api/categories" ;
+const fetchCategorie = async (url, callback) =>
+{
+    const dataFetch = await fetch(url);
+    const data = await dataFetch.json();
+    callback(data);
+};
+
+const fetchCategorieFilter = async (url, callback, btnId) =>
+{
+    const dataFetch = await fetch(url);
+    let data = await dataFetch.json();
+    data = await data.filter((categorie) => categorie.categoryId === btnId);
+    callback(data);
+};
+
 fetchWork(urlWorks, createGallery);
+fetchCategorie(urlCategorie, createCategorie);
