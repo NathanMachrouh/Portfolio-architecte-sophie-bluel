@@ -11,16 +11,11 @@ const createGallery = (data) => {
     gallery.innerHTML = null;
     for (const work of data) {
         const figure = document.createElement("figure");
-        const img = document.createElement("img");
-        const figcaption = document.createElement("figcaption");
-        img.setAttribute('src', `${work.imageUrl}`);
-        figcaption.innerHTML = work.title;
-        figure.appendChild(img);
-        figure.appendChild(figcaption);
-        //figure.innerHTML = `
-        //<img src = "${work.imageUrl}" alt = "${work.title}">
-        //<figcaption>${work.title}</figcaption>
-        //`;
+
+        figure.innerHTML = `
+        <img src = "${work.imageUrl}" alt = "${work.title}">
+        <figcaption>${work.title}</figcaption>
+        `;
         gallery.appendChild(figure);
     };
 };
