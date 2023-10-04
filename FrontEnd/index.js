@@ -11,6 +11,7 @@ const createGallery = (data) => {
     gallery.innerHTML = null;
     for (const work of data) {
         const figure = document.createElement("figure");
+
         figure.innerHTML = `
         <img src = "${work.imageUrl}" alt = "${work.title}">
         <figcaption>${work.title}</figcaption>
