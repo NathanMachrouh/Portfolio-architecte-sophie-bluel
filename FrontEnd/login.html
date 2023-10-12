@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+		rel="stylesheet">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="shortcut icon" href="./assets/icons/instagram.png" type="image/x-icon">
+	<script src="https://kit.fontawesome.com/1634d0209f.js" crossorigin="anonymous"></script>
 </head>
-
-<body>
-    <!DOCTYPE html>
-    <html lang="fr">
-
-    <head>
-        <meta charset="UTF-8" />
-        <title>Sophie Bluel - Architecte d'intérieur</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
-            rel="stylesheet" />
-        <meta name="description" content="" />
-        <link rel="stylesheet" href="./assets/style.css" />
-        <link rel="shortcut icon" href="./assets/icons/instagram.png" type="image/x-icon">
-    </head>
-
     <body>
         <header>
             <h1>Sophie Bluel<span>Architecte d'intérieur</span></h1>
@@ -52,9 +41,11 @@
                 <h2>Log in</h2>
                 <form id="loginForm" name="loginForm" action="./index.html" method="post">
                     <label for="mail">E-mail</label>
-                    <input id="email" type="email" name="email" id="email" required maxlength="128"/>
+                    <input id="email" type="email" name="email" placeholder="sophie.bluel@test.tld" id="email" required maxlength="128"/>
+                    <span id="errorMail"></span>
                     <label for="password">Mot de passe</label>
-                    <input id="password" type="password" name="password" id="password"/>
+                    <input id="password" type="password" name="password" placeholder="S0phie" id="password"/>
+                    <span id="errorPassword"></span>
                     <input id="connect" type="submit" value="Se connecter" />
                     <a class="forgotpassword" href="#">Mot de passe oublié</a>
                 </form>
@@ -70,9 +61,6 @@
                 </ul>
             </nav>
         </footer>
+        <script src="./login.js" defer></script>
     </body>
-
-    </html>
-</body>
-
 </html>
