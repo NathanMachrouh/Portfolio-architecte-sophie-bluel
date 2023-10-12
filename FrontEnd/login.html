@@ -1,71 +1,66 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
-        rel="stylesheet" />
-    <meta name="description" content="" />
-    <link rel="stylesheet" href="./assets/style.css" />
-    <link rel="shortcut icon" href="./assets/icons/instagram.png" type="image/x-icon">
-    
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+		rel="stylesheet">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="shortcut icon" href="./assets/icons/instagram.png" type="image/x-icon">
+	<script src="https://kit.fontawesome.com/1634d0209f.js" crossorigin="anonymous"></script>
 </head>
+    <body>
+        <header>
+            <h1>Sophie Bluel<span>Architecte d'intérieur</span></h1>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="./index.html#portfolio">projets</a>
+                    </li>
+                    <li>
+                        <a href="index.html#contact">contact</a>
+                    </li>
+                    <li>
+                        <a href="login.html">login</a>
+                    </li>
+                    <li>
+                        <a href="http://instagram.com"
+                            target="_blank">
+                            <img src="./assets/icons/instagram.png" alt="Instagram" />
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class = "login">
+                <h2>Log in</h2>
+                <form id="loginForm" name="loginForm" action="./index.html" method="post">
+                    <label for="mail">E-mail</label>
+                    <input id="email" type="email" name="email" placeholder="sophie.bluel@test.tld" id="email" required maxlength="128"/>
+                    <span id="errorMail"></span>
+                    <label for="password">Mot de passe</label>
+                    <input id="password" type="password" name="password" placeholder="S0phie" id="password"/>
+                    <span id="errorPassword"></span>
+                    <input id="connect" type="submit" value="Se connecter" />
+                    <a class="forgotpassword" href="#">Mot de passe oublié</a>
+                </form>
+            </section>
+        </main>
 
-<body>
-    <header>
-        <h1>Sophie Bluel<span>Architecte d'intérieur</span></h1>
-        <nav>
-            <ul>
-                <li>
-                    <a href="./index.html#portfolio">projets</a>
-                </li>
-                <li>
-                    <a href="index.html#contact">contact</a>
-                </li>
-                <li>
-                    <a href="login.html">login</a>
-                </li>
-                <li>
-                    <a href="http://instagram.com" target="_blank">
-                        <img src="./assets/icons/instagram.png" alt="Instagram" />
+        <footer>
+            <nav>
+                <ul>
+                    <a href="#">
+                        <li>Mentions Légales</li>
                     </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="login">
-            <h2>Log in</h2>
-            <form id="loginForm" name="loginForm" action="./index.html" method="post">
-                <label for="email">E-mail</label>
-                <input id="email" type="email" name="email" id="email" required maxlength="128" placeholder="ex: sophie.bluel@test.tld"/>
-                <span id="errorMail"></span>
-                <label for="password">Mot de passe</label>
-                <input id="password" type="password" name="password" id="password" placeholder="ex: S0phie"/>
-                <span id="errorPassword"></span>
-                <input id="connect" type="submit" value="Se connecter" />
-                <a class="forgotpassword" href="#">Mot de passe oublié</a>
-            </form>
-        </section>
-    </main>
-
-    <footer>
-        <nav>
-            <ul>
-                <a href="#">
-                    <li>Mentions Légales</li>
-                </a>
-            </ul>
-        </nav>
-    </footer>
-    <script src="./login.js" defer></script>
-</body>
-
-</html>
-
-
+                </ul>
+            </nav>
+        </footer>
+        <script src="./login.js" defer></script>
+    </body>
 </html>
