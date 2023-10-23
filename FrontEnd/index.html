@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
@@ -58,12 +59,64 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
+
+		<div id="myModal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<div class="modal-content-div">
+					<h1>Galerie photo</h1>
+					<div class="modal-content-galery"></div>
+					<button class="modal-content-btn-ajout-photo">Ajouter une photo</button>
+				</div>
+			</div>
+			<form id="myModal2" class="modal modal2">
+				<div class="modal-content">
+					<i class="fa-solid fa-arrow-left"></i>
+					<span class="close">&times;</span>
+					<div class="modal-content-div modal2-div">
+						<h1>Ajout photo</h1>
+						<div class="modal-content-div-Ajout">
+							<img src="#" id="imagePreview" alt="">
+							<i class="fa-sharp fa-regular fa-image"></i>
+							<button class="btn-ajout-Image">+ Ajouter photo</button>
+							<input type="file" id="image-work" accept=".jpg, .png">
+							<div id="image-fail">jpg, png : 4mo max</div>
+						</div>
+						<div class="modal-content-modif-work">
+							<div class="modal-content-title-work">
+								<label for="titre">Titre</label>
+								<input type="text" id="titre">
+							</div>
+							<div class="modal-content-category-work">
+								<label for="categorie">Catégorie</label>
+								<select id="categorie">
+								</select>
+							</div>
+						</div>
+						<div class="modal-content-galery"></div>
+						<div class="modal2-div-envoi-valide"></div>
+						<button class="modal2-div-btn-valide">Valider</button>
+					</div>
+				</div>
+			</form>
+
+			<div class="modal-validation" id="deleteConfirmationModal">
+				<div class="modal-validation-content">
+					<span class="modal-validation-close">&times;</span>
+					<p>Voulez-vous vraiment supprimer tous les projets ?</p>
+					<div class="modal-validation-content-btn">
+						<button class="modal-confirm-btn"><i class="fa-solid fa-triangle-exclamation"></i> Oui</button>
+						<button class="modal-cancel-btn">Annuler</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<section id="portfolio">
-			<h2>Mes Projets 
-			<button class="connected modif-btn log">
-				<i class="fa-regular fa-pen-to-square"></i> modifier</button>
+			<h2>Mes Projets
+				<button class="connected modif-btn log">
+					<i class="fa-regular fa-pen-to-square"></i> modifier</button>
 			</h2>
-			
+
 			<div class="filtre disconnected">
 			</div>
 			<div class="gallery">
@@ -91,7 +144,7 @@
 			</ul>
 		</nav>
 	</footer>
-	<script src="./index.js" defer></script>
+	<script src="./scripts/index.js" defer></script>
 </body>
 
 </html>
