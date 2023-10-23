@@ -206,31 +206,13 @@ header {
 }
 
 /* Styles pour le bouton de fermeture */
-#myModal .modal-content .close {
-	display: flex;
-	margin-right: -600px;
-}
-
-#myModal2 .modal-content .close {
-	display: flex;
-	margin-top: 2rem;
-}
-
-.close,
-.modal-validation-close {
-	margin-right: 15px;
-	float: right;
+.close {
+	position: absolute;
+	right: 1.5rem;
+	top: 1.5rem;
 	font-size: 28px;
 	font-weight: bold;
 	cursor: pointer;
-}
-
-.close:hover,
-.close:focus,
-.modal-validation-close:hover,
-.modal-validation-close:focus {
-	color: #000;
-	text-decoration: none;
 }
 
 /* Styles pour le contenu de la modal principal */
@@ -254,15 +236,20 @@ header {
 	border-bottom: 1px solid #B3B3B3;
 	padding-bottom: 50px;
 	overflow-x: hidden;
-	display: flex;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
 	flex-wrap: wrap;
 	gap: 10px;
+}
+
+.modal_img{
+	width: 78.123px;
+	height: 104.08px; 
 }
 
 /* Styles pour les images dans la galerie */
 .modal-content-galery figure {
 	display: flex;
-	flex-direction: column;
 	align-items: start;
 	position: relative;
 }
@@ -356,6 +343,8 @@ header {
 	position: absolute;
 	top: 1.5rem;
 	left: 1.5rem;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 /* Styles pour les éléments d'ajout de photo */

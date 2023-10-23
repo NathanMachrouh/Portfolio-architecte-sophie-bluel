@@ -18,40 +18,50 @@ logOutBtn.addEventListener('click', function () {
   window.location.reload()
 })
 
-// Sélectionnez le bouton .modif-btn
+// Sélection bouton .modif-btn
 const modifBtn = document.querySelector('.modif-btn');
 
-// Sélectionnez le bouton .modal-content-btn-ajout-photo
+// Sélection bouton .modal-content-btn-ajout-photo
 const ajoutPhotoBtn = document.querySelector('.modal-content-btn-ajout-photo');
 
-// Sélectionnez la modal
+// Sélection modal
 const modal = document.querySelector('.modal');
 
-// Sélectionnez la modal 2
+// Sélection modal 2
 const modal2 = document.querySelector('.modal2');
 
-// Associez un gestionnaire d'événements au bouton pour afficher la modal
+// Affichage modal 1
 modifBtn.addEventListener('click', function() {
   modal.style.display = 'block';
 });
 
-// Associez un gestionnaire d'événements au bouton .modal-content-btn-ajout-photo pour afficher la modal 2
+// Affichage modal 2
 ajoutPhotoBtn.addEventListener('click', function() {
   modal2.style.display = 'block';
 });
 
-// Sélectionnez le bouton de fermeture (croix) de la modal
-const closeBtn = document.querySelector('.close');
+// Bouton fermerture
+const closeBtn = document.querySelectorAll('.close');
 
-// Associez un gestionnaire d'événements pour fermer la modal en cliquant sur la croix
-closeBtn.addEventListener('click', function() {
-  modal.style.display = 'none';
+// Fermeture au click sur la croix
+closeBtn.forEach(function (close) {
+  close.addEventListener('click', function () {
+    const modalToClose = modal.style.display === 'block' ? modal : modal2;
+    modalToClose.style.display = 'none';
+  });
+});
+
+//retour à la modal d'avant au click sur fléche
+const returnArrow = document.querySelector('.fa-arrow-left');
+
+returnArrow.addEventListener('click', function() {
   modal2.style.display = 'none';
 });
 
-// Vous pouvez également ajouter un gestionnaire d'événements pour fermer la modal et la modal 2
-// en cliquant en dehors de celles-ci
+// Fermeture au click hors de la modal
 window.addEventListener('click', function(event) {
+  
+  console.log(event.target);
   if (event.target === modal) {
     modal.style.display = 'none';
   }
@@ -59,7 +69,6 @@ window.addEventListener('click', function(event) {
     modal2.style.display = 'none';
   }
 });
-
 
 const urlWorks = 'http://localhost:5678/api/works'
 const fetchWork = async (url, callback) => {
@@ -70,13 +79,26 @@ const fetchWork = async (url, callback) => {
 
 const createGallery = (data) => {
   const gallery = document.querySelector('.gallery')
-  gallery.innerHTML = null
+  gallery.innerHTML = ""
   for (const work of data) {
     const figure = document.createElement('figure')
     figure.innerHTML =
             `<img src = "${work.imageUrl}" alt = "${work.title}">
         <figcaption>${work.title}</figcaption>`
     gallery.appendChild(figure)
+  };
+}
+
+
+const createModalGalery = (data) =>{
+  const modalGalery = document.querySelector('.modal-content-galery');
+  modalGalery.innerHTML = ""
+  for (const work of data) {
+    const figure = document.createElement('figure')
+    figure.innerHTML =
+            `<img class = "modal_img" src = "${work.imageUrl}" alt = "${work.title}">
+        <i class="fa-regular fa-trash-can"></i>`
+    modalGalery.appendChild(figure)
   };
 }
 
@@ -111,6 +133,6 @@ const fetchCategorieFilter = async (url, callback, btnId) => {
 }
 
 
-
+fetchWork(urlWorks, createModalGalery)
 fetchWork(urlWorks, createGallery)
 fetchCategorie(urlCategorie, createCategorie)
