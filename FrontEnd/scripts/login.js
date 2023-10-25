@@ -50,8 +50,8 @@ form.addEventListener('submit', async (event) => {
 
     if (response.status === 200) {
       const result = await response.json()
-      localStorage.setItem('token', result.token) // Stockage du token dans le localStorage
-      window.location.href = 'index.html' // Redirection vers la page d'accueil
+      sessionStorage.setItem('token', result.token) // Stockage du token dans le sessionStorage
+      document.location.href = 'index.html' // Redirection vers la page d'accueil
     } else if (response.status === 404 || response.status === 401) {
       showError('#errorPassword', 'Erreur dans l’identifiant ou le mot de passe')
     } else {

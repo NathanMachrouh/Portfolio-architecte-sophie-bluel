@@ -1,8 +1,8 @@
 const connected = document.querySelectorAll('.connected')
 const disconnected = document.querySelectorAll('.disconnected')
 
-if (localStorage.getItem('token')) {
-  console.log(localStorage.getItem('token'))
+if (sessionStorage.getItem('token')) {
+  console.log(sessionStorage.getItem('token'))
   disconnected.forEach((element) => {
     element.style.display = 'none'
   })
@@ -14,7 +14,7 @@ if (localStorage.getItem('token')) {
 
 const logOutBtn = document.querySelector('.logOut')
 logOutBtn.addEventListener('click', function () {
-  localStorage.removeItem('token')
+  sessionStorage.removeItem('token')
   window.location.reload()
 })
 
@@ -31,12 +31,12 @@ const modal = document.querySelector('.modal');
 const modal2 = document.querySelector('.modal2');
 
 // Affichage modal 1
-modifBtn.addEventListener('click', function() {
+modifBtn.addEventListener('click', function () {
   modal.style.display = 'block';
 });
 
 // Affichage modal 2
-ajoutPhotoBtn.addEventListener('click', function() {
+ajoutPhotoBtn.addEventListener('click', function () {
   modal2.style.display = 'block';
 });
 
@@ -54,14 +54,13 @@ closeBtn.forEach(function (close) {
 //retour à la modal d'avant au click sur fléche
 const returnArrow = document.querySelector('.fa-arrow-left');
 
-returnArrow.addEventListener('click', function() {
+returnArrow.addEventListener('click', function () {
   modal2.style.display = 'none';
 });
 
 // Fermeture au click hors de la modal
-window.addEventListener('click', function(event) {
-  
-  console.log(event.target);
+window.addEventListener('click', function (event) {
+
   if (event.target === modal) {
     modal.style.display = 'none';
   }
@@ -83,24 +82,43 @@ const createGallery = (data) => {
   for (const work of data) {
     const figure = document.createElement('figure')
     figure.innerHTML =
-            `<img src = "${work.imageUrl}" alt = "${work.title}">
+      `<img src = "${work.imageUrl}" alt = "${work.title}">
         <figcaption>${work.title}</figcaption>`
     gallery.appendChild(figure)
   };
 }
 
-
-const createModalGalery = (data) =>{
+const createModalGalery = (data) => {
   const modalGalery = document.querySelector('.modal-content-galery');
   modalGalery.innerHTML = ""
-  for (const work of data) {
-    const figure = document.createElement('figure')
+  for (let i = 0; i < data.length; i++) {
+    const figure = document.createElement('figure');
     figure.innerHTML =
-            `<img class = "modal_img" src = "${work.imageUrl}" alt = "${work.title}">
-        <i class="fa-regular fa-trash-can"></i>`
-    modalGalery.appendChild(figure)
+      `<img class = "modal_img" src = "${data[i].imageUrl}" alt = "${data[i].title}">
+        <i id="${data[i].id}" class="fa-regular fa-trash-can"></i>`
+
+    modalGalery.appendChild(figure);
+    const trash = figure.querySelector('.fa-trash-can');
+    trash.addEventListener('click', (e) => {
+      console.log(e.target.id);        
+      deleteWork(e.target.id);
+      fetchWork(urlWorks, createModalGalery)
+      fetchWork(urlWorks, createGallery)
+
+    });
   };
 }
+
+const deleteWork = async (idProject) => {
+  console.log(idProject);
+  const token = sessionStorage.getItem('token');
+  await fetch(`http://localhost:5678/api/works/${idProject}`, {
+    method: 'DELETE',
+    headers : {
+      Authorization: `Bearer ${(token)}`
+    }});
+};
+  ;
 
 const createCategorie = (data) => {
   const filtre = document.querySelector('.filtre')

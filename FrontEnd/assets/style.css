@@ -242,9 +242,9 @@ header {
 	gap: 10px;
 }
 
-.modal_img{
+.modal_img {
 	width: 78.123px;
-	height: 104.08px; 
+	height: 104.08px;
 }
 
 /* Styles pour les images dans la galerie */
@@ -372,16 +372,20 @@ header {
 	font-weight: bold;
 	text-align: center;
 	color: #306685;
+	border: 0;
+	cursor: pointer;
 }
 
 .modal2 .modal2-div-btn-valide {
-	background-color: #A7A7A7;
-	border-radius: 15px;
+	border-radius: 60px;
+	border: 0;
+	background: #A7A7A7;
 	height: 36px;
 	width: 237px;
 	color: white;
 	font-size: 14px;
 	font-family: Syne;
+	cursor: pointer;
 }
 
 #image-work {
