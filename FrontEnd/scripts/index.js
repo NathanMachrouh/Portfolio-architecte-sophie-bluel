@@ -1,6 +1,7 @@
 const connected = document.querySelectorAll('.connected')
 const disconnected = document.querySelectorAll('.disconnected')
 
+// Vérification token connection
 if (sessionStorage.getItem('token')) {
   console.log(sessionStorage.getItem('token'))
   disconnected.forEach((element) => {
@@ -12,6 +13,7 @@ if (sessionStorage.getItem('token')) {
   })
 }
 
+// Déconnexion
 const logOutBtn = document.querySelector('.logOut')
 logOutBtn.addEventListener('click', function () {
   sessionStorage.removeItem('token')
@@ -19,7 +21,7 @@ logOutBtn.addEventListener('click', function () {
 })
 
 // Sélection bouton .modif-btn
-const modifBtn = document.querySelector('.modif-btn');
+const modifBtn = document.querySelectorAll('.modif-btn');
 
 // Sélection bouton .modal-content-btn-ajout-photo
 const ajoutPhotoBtn = document.querySelector('.modal-content-btn-ajout-photo');
@@ -31,13 +33,16 @@ const modal = document.querySelector('.modal');
 const modal2 = document.querySelector('.modal2');
 
 // Affichage modal 1
-modifBtn.addEventListener('click', function () {
-  modal.style.display = 'block';
+modifBtn.forEach(function (modifBtn) {
+  modifBtn.addEventListener('click', function () {
+    modal.style.display = 'block';
+  });
 });
 
 // Affichage modal 2
 ajoutPhotoBtn.addEventListener('click', function () {
   modal2.style.display = 'block';
+  fetchCategorie(urlCategorie, categoryData);
 });
 
 // Bouton fermerture
@@ -69,6 +74,7 @@ window.addEventListener('click', function (event) {
   }
 });
 
+// Requete API projets
 const urlWorks = 'http://localhost:5678/api/works'
 const fetchWork = async (url, callback) => {
   const dataFetch = await fetch(url)
@@ -76,6 +82,7 @@ const fetchWork = async (url, callback) => {
   callback(data)
 }
 
+//Creation galerie page d'acceuil
 const createGallery = (data) => {
   const gallery = document.querySelector('.gallery')
   gallery.innerHTML = ""
@@ -88,6 +95,7 @@ const createGallery = (data) => {
   };
 }
 
+// Creation galerie Modal1
 const createModalGalery = (data) => {
   const modalGalery = document.querySelector('.modal-content-galery');
   modalGalery.innerHTML = ""
@@ -100,26 +108,133 @@ const createModalGalery = (data) => {
     modalGalery.appendChild(figure);
     const trash = figure.querySelector('.fa-trash-can');
     trash.addEventListener('click', (e) => {
-      console.log(e.target.id);        
-      deleteWork(e.target.id);
-      fetchWork(urlWorks, createModalGalery)
-      fetchWork(urlWorks, createGallery)
-
+      console.log(e.target.id);
+      deleteWork(e.target.id)
+        .then(() => {
+          fetchWork(urlWorks, createGallery);
+          fetchWork(urlWorks, createModalGalery);
+        })
     });
   };
 }
 
+// Affichage catégories modal2
+const categorySelect = document.querySelector('.categorie');
+const categoryData = (data) => {
+  categorySelect.innerHTML = "";
+  categorySelect.innerHTML = `<option value="" hidden></option>`
+  for (const category of data) {
+    const option = document.createElement('option');
+    option.setAttribute("id", category.id);
+    option.innerHTML = `${category.name}`;
+    categorySelect.appendChild(option);
+  }
+};
+
+// Messages d'erreurs
+const badSize = document.querySelector('.msg-size-format');
+function msgBadSizeF() {
+  badSize.textContent = "L'image dépasse la limite de taille de 4 Mo !";
+  badSize.style.display = "block";
+  setTimeout(() => {
+    badSize.textContent = "";
+    badSize.style.display = "none";
+  }, 4000);
+}
+
+const BadFormat = document.querySelector('.msg-size-format');
+function msgBadFormatF() {
+  BadFormat.textContent = "Format de fichier non supporté. Utilisez JPEG ou PNG";
+  BadFormat.style.display = "block";
+  setTimeout(() => {
+    BadFormat.textContent = "";
+    BadFormat.style.display = "none";
+  }, 4000);
+}
+
+const msgError = document.querySelector('.msg-ok-error');
+function messageErrorF() {
+  msgError.textContent = "Un problème est survenu, veuillez recommencer.";
+  msgError.style.display = "block";
+  setTimeout(() => {
+    msgError.textContent = "";
+    msgError.style.display = "none";
+  }, 3000);
+}
+
+const msgOk = document.querySelector('.msg-ok-error');
+function messageAddSuccesF() {
+  msgOk.textContent = "Projet ajouté avec succés !";
+  msgOk.style.display = "block";
+  setTimeout(() => {
+    msgOk.textContent = "";
+    msgOk.style.display = "none";
+  }, 3000);
+}
+
+// Verification format et taille
+const imageInput = document.querySelector('#image-work');
+imageInput.addEventListener('change',
+  function checkImg() {
+    const selectImg = imageInput.files[0];
+
+    if (selectImg) {
+      if (selectImg.size > 4 * 1024 * 1024) {
+        msgBadSizeF();
+        return;
+      }
+      const goodFormat = ["image/jpeg", "image/png"];
+      if (!goodFormat.includes(selectImg.type)) {
+        msgBadFormatF();
+        return;
+      }
+    }
+  });
+
+// Vérification formulaire
+const modalPhotoTitle = document.querySelector("#titre");
+const btnFormValider = document.querySelector("#btn-valider");
+
+function checkForm() {
+  if (modalPhotoTitle.value !== "" && btnNewPhoto.files[0] !== undefined && categorySelect.value !== "") {
+    btnFormValider.classList.add("btn-validation")
+    const btnFormValiderCheck = document.querySelector(".btn-validation");
+    btnFormValiderCheck.addEventListener("click", /*sendWork*/);
+    
+  }
+}
+
+// Affichage miniature
+const btnNewPhoto = document.querySelector("#image-work");
+const photoBox = document.querySelector(".modal-content-div-Ajout");
+const allContentPhotoBox = photoBox.querySelectorAll(".display-none");
+
+btnNewPhoto.addEventListener("change", (e) => {
+  e.preventDefault();
+  const objectURL = URL.createObjectURL(btnNewPhoto.files[0]);
+  allContentPhotoBox.forEach((content) => {
+    content.style.display = "none";
+  })
+  const ajoutImage = document.createElement("img");
+  ajoutImage.setAttribute("class", "miniature")
+  ajoutImage.setAttribute("src", objectURL);
+  ajoutImage.setAttribute("alt", btnNewPhoto.files[0].name);
+  photoBox.appendChild(ajoutImage);
+});
+
+// Fonction Suppresion projets
 const deleteWork = async (idProject) => {
   console.log(idProject);
   const token = sessionStorage.getItem('token');
   await fetch(`http://localhost:5678/api/works/${idProject}`, {
     method: 'DELETE',
-    headers : {
+    headers: {
       Authorization: `Bearer ${(token)}`
-    }});
+    }
+  });
 };
-  ;
 
+// Creation catégories (filtres)
 const createCategorie = (data) => {
   const filtre = document.querySelector('.filtre')
   const tous = document.createElement('button')
@@ -136,6 +251,7 @@ const createCategorie = (data) => {
   }
 }
 
+// Requetes API catégories
 const urlCategorie = 'http://localhost:5678/api/categories'
 const fetchCategorie = async (url, callback) => {
   const dataFetch = await fetch(url)
