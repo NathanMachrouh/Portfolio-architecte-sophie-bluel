@@ -284,6 +284,7 @@ header {
 	color: white;
 	background-color: #1D6154;
 	border: 0;
+	cursor: pointer;
 }
 
 /* Styles pour la modal d'ajout de photo */
@@ -364,7 +365,7 @@ header {
 	font-size: 58px;
 }
 
-.modal2 .modal-content-div-Ajout button {
+.modal2 .modal-content-div-Ajout label {
 	background-color: #CBD6DC;
 	border-radius: 20px;
 	font-size: 14px;
@@ -376,6 +377,21 @@ header {
 	cursor: pointer;
 }
 
+.modal2 option {
+	color: #444;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+.msg-size-format{
+	color: red;
+	text-align: center;
+	font-weight: bold;
+}
+
 .modal2 .modal2-div-btn-valide {
 	border-radius: 60px;
 	border: 0;
@@ -385,7 +401,19 @@ header {
 	color: white;
 	font-size: 14px;
 	font-family: Syne;
+	pointer-events: none;
+}
+
+.btn-validation{
+	color: white;
+	background-color: #1D6154;
 	cursor: pointer;
+	pointer-events: auto;
+}
+
+.miniature{
+	width: 129px;
+	height: 193px; 
 }
 
 #image-work {
