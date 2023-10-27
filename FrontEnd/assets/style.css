@@ -3,19 +3,87 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,36 +91,57 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
 body {
 	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
+	margin: auto;
+	font-family: 'Work Sans';
 	font-size: 14px;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -60,8 +149,7 @@ header {
 }
 
 .ModeEdition {
-	margin: 0 -50%;
-	width: 200%;
+	width: 100%;
 	height: 59px;
 	background-color: #000000;
 	display: flex;
@@ -87,7 +175,317 @@ header {
 	margin-left: 2rem;
 }
 
-.log{
+/* Styles pour la modal principale */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	padding-top: 20px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Styles pour le contenu de la modal principale */
+.modal-content {
+	background-color: #ffffff;
+	margin: auto;
+	padding: 20px;
+	max-width: 630px;
+	max-height: 731px;
+	border-radius: 20px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 25px;
+}
+
+/* Styles pour le bouton de fermeture */
+.close {
+	position: absolute;
+	right: 1.5rem;
+	top: 1.5rem;
+	font-size: 28px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+/* Styles pour le contenu de la modal principal */
+.modal-content-div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 25px;
+	padding: 50px 80px 50px;
+}
+
+.modal-content-div h1 {
+	font-size: 26px;
+}
+
+/* Styles pour la galerie photo */
+.modal-content-galery {
+	max-height: 450px;
+	width: 100%;
+	border-bottom: 1px solid #B3B3B3;
+	padding-bottom: 50px;
+	overflow-x: hidden;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.modal_img {
+	width: 78.123px;
+	height: 104.08px;
+}
+
+/* Styles pour les images dans la galerie */
+.modal-content-galery figure {
+	display: flex;
+	align-items: start;
+	position: relative;
+}
+
+.modal-content-galery figure i {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 17px;
+	height: 17px;
+	background-color: #000;
+	color: white;
+	border-radius: 3px;
+	top: 4px;
+}
+
+.modal-content-galery figure .fa-trash-can {
+	cursor: pointer;
+	right: 4px;
+}
+
+.modal-content-galery figure .fa-arrows-up-down-left-right {
+	cursor: pointer;
+	right: 25px;
+}
+
+.modal-content-btn-ajout-photo {
+	width: 237px;
+	height: 36px;
+	border-radius: 60px;
+	color: white;
+	background-color: #1D6154;
+	border: 0;
+	cursor: pointer;
+}
+
+/* Styles pour la modal d'ajout de photo */
+.modal2 {
+	display: none;
+}
+
+.modal2-div {
+	width: 80%;
+}
+
+/* Styles pour le contenu de la modal d'ajout de photo */
+.modal2 .modal-content {
+	background-color: #ffffff;
+	margin: auto;
+	max-width: 630px;
+	max-height: 731px;
+	border-radius: 20px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 25px;
+}
+
+.modal-content-modif-work {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-bottom: -2rem;
+}
+
+.modal-content-modif-work label {
+	margin-bottom: 1rem;
+}
+
+.modal-content-modif-work input,
+.modal-content-modif-work select {
+	background-color: white;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border: 0;
+	height: 2.5rem;
+}
+
+.modal-content-category-work,
+.modal-content-title-work {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 2rem;
+}
+
+/* Styles pour le bouton de retour dans la modal d'ajout de photo */
+.modal2 .fa-arrow-left {
+	cursor: pointer;
+	display: flex;
+	position: absolute;
+	top: 1.5rem;
+	left: 1.5rem;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* Styles pour les éléments d'ajout de photo */
+.modal2 .modal-content-div-Ajout {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	background-color: #E8F1F6;
+	width: 100%;
+	height: 13rem;
+}
+
+.modal2 .modal-content-div-Ajout i {
+	color: rgb(212, 212, 212);
+	font-size: 58px;
+}
+
+.modal2 .modal-content-div-Ajout label {
+	background-color: #CBD6DC;
+	border-radius: 20px;
+	font-size: 14px;
+	padding: 10px 45px;
+	font-weight: bold;
+	text-align: center;
+	color: #306685;
+	border: 0;
+	cursor: pointer;
+}
+
+.modal2 option {
+	color: #444;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+.msg-size-format{
+	color: red;
+	text-align: center;
+	font-weight: bold;
+}
+
+.modal2 .modal2-div-btn-valide {
+	border-radius: 60px;
+	border: 0;
+	background: #A7A7A7;
+	height: 36px;
+	width: 237px;
+	color: white;
+	font-size: 14px;
+	font-family: Syne;
+	pointer-events: none;
+}
+
+.btn-validation{
+	color: white;
+	background-color: #1D6154;
+	cursor: pointer;
+	pointer-events: auto;
+}
+
+.miniature{
+	width: 129px;
+	height: 193px; 
+}
+
+#image-work {
+	display: none;
+}
+
+/* Styles pour la modal de confirmation de suppression */
+.modal-validation {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	padding-top: 20px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-validation-content {
+	position: absolute;
+	width: 400px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fefefe;
+	padding: 20px;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding: 50px;
+	gap: 20px;
+}
+
+.modal-validation-content-btn {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.modal-validation-content-btn .modal-confirm-btn,
+.modal-validation-content-btn .modal-cancel-btn {
+	color: white;
+	margin-top: 10px;
+	cursor: pointer;
+	border-radius: 3px;
+	height: 30px;
+}
+
+.modal-validation-content-btn .modal-confirm-btn {
+	background-color: red;
+	border-radius: 3px;
+	width: 50px;
+}
+
+.modal-validation-content-btn .modal-cancel-btn {
+	background-color: rgb(178, 167, 167);
+	width: 70px;
+}
+
+.modal-validation-close {
+	position: absolute;
+	top: 0;
+	right: -10px;
+}
+
+/* Fin des styles de la modal de confirmation de suppression */
+
+.log {
 	cursor: pointer;
 }
 
@@ -95,7 +493,7 @@ section {
 	margin: 50px 0
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -104,97 +502,106 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+h1>span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size: 10px;
 	letter-spacing: 0.1em;
 }
 
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
 
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
 
-.filtre{
+.filtre {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 2rem;
 	gap: 1.5rem;
 }
 
-.filtre button{
+.filtre button {
 	background-color: white;
 	color: #1D6154;
 	border-radius: 60px;
 	padding: 0.5rem 1.5rem;
 	border: 1px #1D6154 solid;
 	font-weight: 700;
-	cursor:pointer;
+	cursor: pointer;
 }
 
-.filtre button:focus{
+.filtre button:focus {
 	background-color: #1D6154;
 	color: white;
 }
 
-.login h2{
+.login h2 {
 	text-align: center;
 	margin-bottom: 1.5rem;
 }
 
-.login, #loginForm{
+.login,
+#loginForm {
 	display: flex;
 	flex-direction: column;
 	align-self: center;
 	gap: 1rem;
 }
 
-#email, #password{
+#email,
+#password {
 	padding: 0.7rem;
 	width: 300px;
 	border: none;
 	box-shadow: 0px 4px 14px 0px #00000017;
 }
 
-.forgotpassword{
+.forgotpassword {
 	text-align: center;
 }
 
-#email:focus, #password:focus{
+#email:focus,
+#password:focus {
 	outline: none;
 }
 
-#connect{
+#connect {
 	padding: 1rem;
 }
 
-a{
+a {
 	text-decoration: none;
 	color: inherit;
 }
 
-li:hover, a:hover {
+li:hover,
+a:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -204,6 +611,7 @@ li:hover, a:hover {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -211,10 +619,12 @@ li:hover, a:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -227,20 +637,24 @@ li:hover, a:hover {
 	width: 100%;
 
 }
+
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+
+#contact>* {
 	text-align: center;
 
 }
-#contact h2{
+
+#contact h2 {
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
@@ -251,23 +665,25 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 }
 
 footer nav ul {
@@ -275,4 +691,3 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-

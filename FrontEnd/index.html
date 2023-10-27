@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
@@ -15,8 +16,8 @@
 </head>
 
 <body>
-	<div id="myBtn" class="connected log ModeEdition loginSwitch"><i class="myBtn fa-regular fa-pen-to-square"></i>
-		<button class="myBtn buttonEdition">Mode édition</button>
+	<div id="myBtn" class="connected ModeEdition loginSwitch"><i class="myBtn fa-regular fa-pen-to-square"></i>
+		<button class="myBtn modif-btn buttonEdition">Mode édition</button>
 	</div>
 	<header>
 		<h1>Sophie Bluel<span>Architecte d'intérieur</span></h1>
@@ -58,12 +59,54 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
+
+		<div id="myModal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<div class="modal-content-div">
+					<h1>Galerie photo</h1>
+					<div class="modal-content-galery"></div>
+					<button class="modal-content-btn-ajout-photo">Ajouter une photo</button>
+				</div>
+			</div>
+			<form id="myModal2" class="modal modal2">
+				<div class="modal-content">
+					<i class="fa-solid fa-arrow-left"></i>
+					<span class="close">&times;</span>
+					<div class="modal-content-div modal2-div">
+						<h1>Ajout photo</h1>
+						<div class="modal-content-div-Ajout">
+							<img class="display-none" src="#" id="imagePreview" alt="">
+							<i class="fa-sharp fa-regular fa-image display-none"></i>
+							<label for="image-work" class="btn-ajout-Image display-none">+ Ajouter photo</label>
+							<input class="display-none" type="file" id="image-work">
+							<div class="display-none" id="image-fail">jpg, png : 4mo max</div>
+						</div>
+						<div class="msg-size-format"></div>
+						<div class="modal-content-modif-work">
+							<div class="modal-content-title-work">
+								<label for="titre">Titre</label>
+								<input type="text" id="titre">
+							</div>
+							<div class="modal-content-category-work">
+								<label for="categorie">Catégorie</label>
+								<select class="categorie" id="categorie">
+								</select>
+							</div>
+						</div>
+						<div class="modal-content-galery"></div>
+						<div class="msg-ok-error"></div>
+						<button id="btn-valider" class="modal2-div-btn-valide">Valider</button>
+					</div>
+				</div>
+			</form>
+		</div>
 		<section id="portfolio">
-			<h2>Mes Projets 
-			<button class="connected modif-btn log">
-				<i class="fa-regular fa-pen-to-square"></i> modifier</button>
+			<h2>Mes Projets
+				<button class="connected modif-btn log">
+					<i class="fa-regular fa-pen-to-square"></i> modifier</button>
 			</h2>
-			
+
 			<div class="filtre disconnected">
 			</div>
 			<div class="gallery">
@@ -91,7 +134,7 @@
 			</ul>
 		</nav>
 	</footer>
-	<script src="./index.js" defer></script>
+	<script src="./scripts/index.js" defer></script>
 </body>
 
 </html>
