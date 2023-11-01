@@ -386,8 +386,14 @@ header {
 	line-height: normal;
 }
 
-.msg-size-format{
+.msg-size-format, #errorPassword{
 	color: red;
+	text-align: center;
+	font-weight: bold;
+}
+
+.msg-ok-error{
+	color: green;
 	text-align: center;
 	font-weight: bold;
 }
@@ -404,7 +410,7 @@ header {
 	pointer-events: none;
 }
 
-.btn-validation{
+.modal2-div .btn-validation{
 	color: white;
 	background-color: #1D6154;
 	cursor: pointer;
@@ -419,71 +425,6 @@ header {
 #image-work {
 	display: none;
 }
-
-/* Styles pour la modal de confirmation de suppression */
-.modal-validation {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	padding-top: 20px;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-validation-content {
-	position: absolute;
-	width: 400px;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: #fefefe;
-	padding: 20px;
-	border-radius: 5px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	padding: 50px;
-	gap: 20px;
-}
-
-.modal-validation-content-btn {
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-}
-
-.modal-validation-content-btn .modal-confirm-btn,
-.modal-validation-content-btn .modal-cancel-btn {
-	color: white;
-	margin-top: 10px;
-	cursor: pointer;
-	border-radius: 3px;
-	height: 30px;
-}
-
-.modal-validation-content-btn .modal-confirm-btn {
-	background-color: red;
-	border-radius: 3px;
-	width: 50px;
-}
-
-.modal-validation-content-btn .modal-cancel-btn {
-	background-color: rgb(178, 167, 167);
-	width: 70px;
-}
-
-.modal-validation-close {
-	position: absolute;
-	top: 0;
-	right: -10px;
-}
-
-/* Fin des styles de la modal de confirmation de suppression */
 
 .log {
 	cursor: pointer;
@@ -544,7 +485,7 @@ nav li {
 	cursor: pointer;
 }
 
-.filtre button:focus {
+#filtre {
 	background-color: #1D6154;
 	color: white;
 }
