@@ -14,28 +14,19 @@ form.addEventListener('submit', async (event) => {
 
   // Fonction pour afficher une erreur spécifique
   const showError = (selector, message) => {
-    messageErrorLogin(selector, message)
+    messageErrorLogin(selector, message);
+
+    setTimeout(() => {
+      const errorElement = document.querySelector(selector);
+      if (errorElement) {
+        errorElement.textContent = '';
+      }
+    }, 3000);
   }
 
   // Fonction pour effacer un message d'erreur spécifique
   const clearError = (selector) => {
     document.querySelector(selector).innerHTML = ''
-  }
-
-  // Validation de l'email
-  if (!email) {
-    showError('#errorMail', 'Le champ E-Mail est vide')
-  } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-    showError('#errorMail', "L'e-mail est invalide")
-  } else {
-    clearError('#errorMail') // Efface les erreurs précédentes
-  }
-
-  // Validation du mot de passe
-  if (!password) {
-    showError('#errorPassword', 'Le champ Mot de passe est vide')
-  } else {
-    clearError('#errorPassword') // Efface les erreurs précédentes
   }
 
   try {
@@ -53,7 +44,7 @@ form.addEventListener('submit', async (event) => {
       sessionStorage.setItem('token', result.token) // Stockage du token dans le sessionStorage
       document.location.href = 'index.html' // Redirection vers la page d'accueil
     } else if (response.status === 404 || response.status === 401) {
-      showError('#errorPassword', 'Erreur dans l’identifiant ou le mot de passe')
+      setTimeout( showError('#errorPassword', 'Erreur dans l’identifiant ou le mot de passe'), 3000);
     } else {
       throw new Error('Erreur de requête au serveur')
     }
