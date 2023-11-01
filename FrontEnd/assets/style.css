@@ -386,6 +386,7 @@ header {
 	line-height: normal;
 }
 
+/* Message d'erreurs et de reussite */
 .msg-size-format, #errorPassword{
 	color: red;
 	text-align: center;
