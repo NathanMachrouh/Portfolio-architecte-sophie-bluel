@@ -53,6 +53,7 @@ closeBtn.forEach(function (close) {
   close.addEventListener('click', function () {
     const modalToClose = modal.style.display === 'block' ? modal : modal2;
     modalToClose.style.display = 'none';
+    resetForm();
   });
 });
 
@@ -61,6 +62,7 @@ const returnArrow = document.querySelector('.fa-arrow-left');
 
 returnArrow.addEventListener('click', function () {
   modal2.style.display = 'none';
+  resetForm();
 });
 
 // Fermeture au click hors de la modal
@@ -68,9 +70,11 @@ window.addEventListener('click', function (event) {
 
   if (event.target === modal) {
     modal.style.display = 'none';
+    resetForm();
   }
   if (event.target === modal2) {
     modal2.style.display = 'none';
+    resetForm();
   }
 });
 
@@ -119,7 +123,7 @@ const createModalGalery = (data) => {
 }
 
 // Affichage catégories modal2
-const categorySelect = document.querySelector('.categorie');
+const categorySelect = document.querySelector('#categorie');
 const categoryData = (data) => {
   categorySelect.innerHTML = "";
   categorySelect.innerHTML = `<option value="" hidden></option>`
@@ -178,30 +182,89 @@ imageInput.addEventListener('change',
   function checkImg() {
     const selectImg = imageInput.files[0];
 
-    if (selectImg) {
-      if (selectImg.size > 4 * 1024 * 1024) {
-        msgBadSizeF();
-        return;
-      }
-      const goodFormat = ["image/jpeg", "image/png"];
-      if (!goodFormat.includes(selectImg.type)) {
-        msgBadFormatF();
-        return;
-      }
+    if (selectImg.size > 4 * 1024 * 1024) {
+      imageInput.value = "";
+      msgBadSizeF();
+      return;
     }
+    const goodFormat = ["image/jpeg", "image/png"];
+    if (!goodFormat.includes(selectImg.type)) {
+      imageInput.value = "";
+      msgBadFormatF();
+      return;
+    }
+
   });
 
 // Vérification formulaire
 const modalPhotoTitle = document.querySelector("#titre");
 const btnFormValider = document.querySelector("#btn-valider");
 
+
 function checkForm() {
   if (modalPhotoTitle.value !== "" && btnNewPhoto.files[0] !== undefined && categorySelect.value !== "") {
-    btnFormValider.classList.add("btn-validation")
+    btnFormValider.classList.add("btn-validation");
     const btnFormValiderCheck = document.querySelector(".btn-validation");
-    btnFormValiderCheck.addEventListener("click", /*sendWork*/);
-    
+    btnFormValiderCheck.addEventListener("click", sendWork);
   }
+}
+
+modalPhotoTitle.addEventListener("change", () => {
+  checkForm();
+})
+
+let categorySelectId = "";
+categorySelect.addEventListener("change", () => {
+  categorySelectId = categorySelect.selectedIndex;
+  console.log(categorySelectId)
+  checkForm();
+})
+
+// Ajout de projet
+const token = sessionStorage.getItem("token");
+const sendWork = async (event) => {
+  event.preventDefault();
+  const imageInput = document.querySelector("#image-work");
+  const titleInput = document.querySelector("#titre");
+  const categorySelect = document.querySelector("#categorie");
+
+  const image = imageInput.files[0];
+  const title = titleInput.value;
+
+  let formData = new FormData();
+  formData.append("image", image);
+  formData.append("title", title);
+  formData.append("category", categorySelectId);
+  console.log(formData);
+  const response = await fetch(urlWorks, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+    },
+    body: formData
+  });
+  console.log(token);
+  if (response.ok) {
+    messageAddSuccesF();
+    resetForm();
+    fetchWork(urlWorks, createGallery);
+    fetchWork(urlWorks, createModalGalery);
+  } else {
+    messageErrorF();
+  }
+}
+
+// Reset de la modal
+function resetForm() {
+  document.querySelector("#titre").value = "";
+  imageInput.value = "";
+  allContentPhotoBox.forEach((content) => {
+    content.style.display = "block";
+  });
+  document.querySelectorAll(".miniature, #image-work").forEach((element) => {
+    element.style.display = "none";
+  });
+  btnFormValider.classList.remove("btn-validation");
 }
 
 // Affichage miniature
@@ -220,6 +283,7 @@ btnNewPhoto.addEventListener("change", (e) => {
   ajoutImage.setAttribute("src", objectURL);
   ajoutImage.setAttribute("alt", btnNewPhoto.files[0].name);
   photoBox.appendChild(ajoutImage);
+  checkForm();
 });
 
 // Fonction Suppresion projets
@@ -236,19 +300,28 @@ const deleteWork = async (idProject) => {
 
 // Creation catégories (filtres)
 const createCategorie = (data) => {
-  const filtre = document.querySelector('.filtre')
-  const tous = document.createElement('button')
-  tous.innerHTML = 'Tous'
-  tous.addEventListener('click', () =>
-    fetchWork(urlWorks, createGallery))
+  const filtre = document.querySelector('.filtre');
+  const tous = document.createElement('button');
+  tous.innerHTML = 'Tous';
+  tous.setAttribute("id", "filtre");
+  tous.addEventListener('click', () => {
+    document.getElementById('filtre').removeAttribute('id');
+    tous.setAttribute('id', 'filtre');
+    fetchWork(urlWorks, createGallery)
+  })
   filtre.appendChild(tous)
   for (const categorie of data) {
     const bouton = document.createElement('button')
     bouton.innerHTML = categorie.name
-    bouton.addEventListener('click', () =>
-      fetchCategorieFilter(urlWorks, createGallery, categorie.id))
-    filtre.appendChild(bouton)
+    bouton.addEventListener('click', () => {
+      document.getElementById('filtre').removeAttribute('id');
+      bouton.setAttribute('id', 'filtre');
+      fetchCategorieFilter(urlWorks, createGallery, categorie.id);
+    });
+    filtre.appendChild(bouton);
   }
+  const boutons = document.querySelectorAll("button");
+
 }
 
 // Requetes API catégories
