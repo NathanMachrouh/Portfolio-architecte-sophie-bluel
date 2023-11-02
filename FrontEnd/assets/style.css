@@ -244,6 +244,7 @@ header {
 .modal_img {
 	width: 76.611px;
 	height: 102.064px; 
+	object-fit: cover;
 }
 
 /* Styles pour les images dans la galerie */
@@ -419,6 +420,8 @@ header {
 
 .miniature{
 	width: 155px; 
+	height: 100%;
+	object-fit: cover;
 }
 
 #image-work {
@@ -575,7 +578,8 @@ a:hover {
 
 .gallery img {
 	width: 100%;
-
+	height: 100%;
+	object-fit: cover;
 }
 
 #contact {
