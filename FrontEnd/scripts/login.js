@@ -24,11 +24,6 @@ form.addEventListener('submit', async (event) => {
     }, 3000);
   }
 
-  // Fonction pour effacer un message d'erreur spécifique
-  const clearError = (selector) => {
-    document.querySelector(selector).innerHTML = ''
-  }
-
   try {
     // Envoi de la requête au serveur pour vérifier la combinaison login/mot de passe
     const response = await fetch('http://localhost:5678/api/users/login', {

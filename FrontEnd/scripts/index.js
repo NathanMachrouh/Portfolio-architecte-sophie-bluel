@@ -3,7 +3,6 @@ const disconnected = document.querySelectorAll('.disconnected')
 
 // Vérification token connection
 if (sessionStorage.getItem('token')) {
-  console.log(sessionStorage.getItem('token'))
   disconnected.forEach((element) => {
     element.style.display = 'none'
   })
@@ -79,7 +78,8 @@ window.addEventListener('click', function (event) {
 });
 
 // Requete API projets
-const urlWorks = 'http://localhost:5678/api/works'
+const urlWorks = 'http://localhost:5678/api/works';
+
 const fetchWork = async (url, callback) => {
   const dataFetch = await fetch(url)
   const data = await dataFetch.json()
@@ -112,7 +112,6 @@ const createModalGalery = (data) => {
     modalGalery.appendChild(figure);
     const trash = figure.querySelector('.fa-trash-can');
     trash.addEventListener('click', (e) => {
-      console.log(e.target.id);
       deleteWork(e.target.id)
         .then(() => {
           fetchWork(urlWorks, createGallery);
@@ -200,7 +199,6 @@ imageInput.addEventListener('change',
 const modalPhotoTitle = document.querySelector("#titre");
 const btnFormValider = document.querySelector("#btn-valider");
 
-
 function checkForm() {
   if (modalPhotoTitle.value !== "" && btnNewPhoto.files[0] !== undefined && categorySelect.value !== "") {
     btnFormValider.classList.add("btn-validation");
@@ -216,7 +214,6 @@ modalPhotoTitle.addEventListener("change", () => {
 let categorySelectId = "";
 categorySelect.addEventListener("change", () => {
   categorySelectId = categorySelect.selectedIndex;
-  console.log(categorySelectId)
   checkForm();
 })
 
@@ -235,7 +232,6 @@ const sendWork = async (event) => {
   formData.append("image", image);
   formData.append("title", title);
   formData.append("category", categorySelectId);
-  console.log(formData);
   const response = await fetch(urlWorks, {
     method: "POST",
     headers: {
@@ -243,7 +239,6 @@ const sendWork = async (event) => {
     },
     body: formData
   });
-  console.log(token);
   if (response.ok) {
     messageAddSuccesF();
     resetForm();
@@ -288,7 +283,6 @@ btnNewPhoto.addEventListener("change", (e) => {
 
 // Fonction Suppresion projets
 const deleteWork = async (idProject) => {
-  console.log(idProject);
   const token = sessionStorage.getItem('token');
   await fetch(`http://localhost:5678/api/works/${idProject}`, {
     method: 'DELETE',
