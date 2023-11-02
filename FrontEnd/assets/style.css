@@ -241,8 +241,8 @@ header {
 }
 
 .modal_img {
-	width: 78.123px;
-	height: 104.08px;
+	width: 76.611px;
+	height: 102.064px; 
 }
 
 /* Styles pour les images dans la galerie */
@@ -417,8 +417,7 @@ header {
 }
 
 .miniature{
-	width: 129px;
-	height: 193px; 
+	width: 155px; 
 }
 
 #image-work {
